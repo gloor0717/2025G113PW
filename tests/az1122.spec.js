@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test('User Story Az 1125: Utilisation du module de calcul "Economic feasability"', async ({
+test('User Story Az 1122: Utilisation du module de calcul "Space Cooling Demand"', async ({
   page,
 }) => {
   await page.goto("https://coollifedev.hevs.ch/");
@@ -11,21 +11,25 @@ test('User Story Az 1125: Utilisation du module de calcul "Economic feasability"
     await page.getByRole("button", { name: "Accept all cookies" }).click();
   }
 
+  // Enter "Geneve" in the search input
   const searchInput = page.locator("#place-input");
   await searchInput.fill("Geneve");
 
+  // Wait for suggestions to load and press Enter to select the first suggestion
   await page.keyboard.press("Enter");
 
+  // Wait for the map to update (adjust timeout as necessary)
   await page.waitForTimeout(2000);
 
   await page.getByRole("button", { name: "Layers" }).click();
   await page.getByLabel("LAU 2").check();
 
+  // Click in the center of the page
   await page.mouse.click(500, 500);
 
   await page.locator("#funct-test-cms").click();
 
-  await page.locator('button:has-text("Economic feasability")').click();
+  await page.locator('button:has-text("CM - Space cooling Demand")').click();
 
   await page.locator("#funct-test-run-cm-button").click();
 

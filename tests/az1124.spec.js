@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test('User Story Az 1125: Utilisation du module de calcul "Economic feasability"', async ({
+test('User Story Az 1124: Utilisation du module de calcul "Comfort, lifestyle and user behaviour"', async ({
   page,
 }) => {
   await page.goto("https://coollifedev.hevs.ch/");
@@ -25,7 +25,7 @@ test('User Story Az 1125: Utilisation du module de calcul "Economic feasability"
 
   await page.locator("#funct-test-cms").click();
 
-  await page.locator('button:has-text("Economic feasability")').click();
+  await page.locator('button:has-text("CM - Comfort, lifestyle and user behaviour")').click();
 
   await page.locator("#funct-test-run-cm-button").click();
 
