@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test('User Story Az 1124: Utilisation du module de calcul "Economic feasability"', async ({
+test('User Story Az 1125: Utilisation du module de calcul "Economic feasability"', async ({
   page,
 }) => {
   await page.goto("https://coollifedev.hevs.ch/");
