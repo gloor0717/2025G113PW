@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-test('User Story Az 1124: Utilisation du module de calcul "Legal and regulatory layers"', async ({
+test('User Story Az 1126: Utilisation du module de calcul "Legal and regulatory layers"', async ({
   page,
 }) => {
   await page.goto("https://coollifedev.hevs.ch/");
