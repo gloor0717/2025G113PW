@@ -11,34 +11,28 @@ test('User Story Az 1122: Utilisation du module de calcul "Space Cooling Demand"
     await page.getByRole("button", { name: "Accept all cookies" }).click();
   }
 
-  // Enter "Geneve" in the search input
-  const searchInput = page.locator("#place-input");
-  await searchInput.fill("Geneve");
+  const lau2Option = page.locator(
+    ".leaflet-control-layers-list label:has-text('LAU 2')"
+  );
+  await lau2Option.waitFor();
+  await lau2Option.click();
 
-  // Wait for suggestions to load and press Enter to select the first suggestion
-  await page.keyboard.press("Enter");
+  await page.fill('input[id="place-input"]', "Geneva");
+  await page.press('input[id="place-input"]', "Enter");
+  await page.waitForLoadState("networkidle");
 
-  // Wait for the map to update (adjust timeout as necessary)
-  await page.waitForTimeout(2000);
-
-  await page.getByRole("button", { name: "Layers" }).click();
-  await page.getByLabel("LAU 2").check();
-
-  // Click in the center of the page
-  await page.mouse.click(500, 500);
+  await page.mouse.click(600, 400);
 
   await page.locator("#funct-test-cms").click();
-
   await page.locator('button:has-text("CM - Space cooling Demand")').click();
-
   await page.locator("#funct-test-run-cm-button").click();
 
   const resultPanel = page.locator("app-right-side-panel");
   await expect(resultPanel).toBeVisible();
 
   const valueElement = resultPanel.locator("td.value-column");
-  const valueText = await valueElement.textContent();
-  const value = parseFloat(valueText.trim());
+  const valueText = await valueElement.innerText();
+  const value = parseFloat(valueText.replace("GWh", "").trim());
 
-  expect(value).toBeGreaterThanOrEqual(0.1);
+  expect(value).toBe(472);
 });
